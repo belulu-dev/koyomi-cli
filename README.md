@@ -4,7 +4,7 @@
 
 ## インストール
 
-### ワンライナー
+### Linux / macOS
 
 ```bash
 curl -fsSL https://raw.githubusercontent.com/belulu-dev/koyomi-cli/main/install.sh | sh
@@ -15,6 +15,22 @@ curl -fsSL https://raw.githubusercontent.com/belulu-dev/koyomi-cli/main/install.
 ```bash
 KOYOMI_INSTALL_DIR=$HOME/.local/bin curl -fsSL https://raw.githubusercontent.com/belulu-dev/koyomi-cli/main/install.sh | sh
 ```
+
+### NixOS
+
+```bash
+KOYOMI_INSTALL_DIR=~/.local/bin curl -fsSL https://raw.githubusercontent.com/belulu-dev/koyomi-cli/main/install.sh | sh
+```
+
+`~/.local/bin` が PATH に含まれていることを確認してください。
+
+### Windows (PowerShell)
+
+```powershell
+irm https://raw.githubusercontent.com/belulu-dev/koyomi-cli/main/install.ps1 | iex
+```
+
+`%LOCALAPPDATA%\koyomi-cli\` にインストールされ、ユーザー PATH に自動追加されます。
 
 ### 手動インストール
 
