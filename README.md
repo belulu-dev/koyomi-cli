@@ -10,16 +10,20 @@
 curl -fsSL https://raw.githubusercontent.com/belulu-dev/koyomi-cli/main/install.sh | sh
 ```
 
-`/usr/local/bin` に書き込み権限がない場合は `sudo` で実行されます。インストール先を変更するには `KOYOMI_INSTALL_DIR` を指定してください。
+`/usr/local/bin` が存在しない環境（NixOS 等）では自動的に `~/.local/bin` にインストールされます。`/usr/local/bin` に書き込み権限がない場合は `sudo` で実行されます。
+
+インストール先を明示的に変更するには:
 
 ```bash
-KOYOMI_INSTALL_DIR=$HOME/.local/bin curl -fsSL https://raw.githubusercontent.com/belulu-dev/koyomi-cli/main/install.sh | sh
+curl -fsSL https://raw.githubusercontent.com/belulu-dev/koyomi-cli/main/install.sh | KOYOMI_INSTALL_DIR=$HOME/.local/bin sh
 ```
 
 ### NixOS
 
+`/usr/local/bin` が存在しないため、デフォルトで `~/.local/bin` にインストールされます。
+
 ```bash
-KOYOMI_INSTALL_DIR=~/.local/bin curl -fsSL https://raw.githubusercontent.com/belulu-dev/koyomi-cli/main/install.sh | sh
+curl -fsSL https://raw.githubusercontent.com/belulu-dev/koyomi-cli/main/install.sh | sh
 ```
 
 `~/.local/bin` が PATH に含まれていることを確認してください。

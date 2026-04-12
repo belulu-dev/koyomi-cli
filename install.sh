@@ -2,8 +2,16 @@
 set -eu
 
 REPO="belulu-dev/koyomi-cli"
-INSTALL_DIR="${KOYOMI_INSTALL_DIR:-/usr/local/bin}"
 BINARY_NAME="koyomi"
+
+# インストール先: 環境変数 > /usr/local/bin（存在時）> ~/.local/bin
+if [ -n "${KOYOMI_INSTALL_DIR:-}" ]; then
+  INSTALL_DIR="$KOYOMI_INSTALL_DIR"
+elif [ -d "/usr/local/bin" ]; then
+  INSTALL_DIR="/usr/local/bin"
+else
+  INSTALL_DIR="${HOME}/.local/bin"
+fi
 
 # macOS の場合 sha256sum がなければ shasum で代替
 if ! command -v sha256sum >/dev/null 2>&1; then
@@ -65,6 +73,10 @@ main() {
   fi
 
   echo "Installing to ${INSTALL_DIR}/${BINARY_NAME}..."
+  if [ ! -d "$INSTALL_DIR" ]; then
+    echo "Creating ${INSTALL_DIR}..."
+    mkdir -p "$INSTALL_DIR"
+  fi
   if [ -w "$INSTALL_DIR" ]; then
     install -m 755 "${archive_name}/${binary}" "${INSTALL_DIR}/${BINARY_NAME}"
   else
